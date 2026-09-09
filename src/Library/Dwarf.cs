@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+
 public class Dwarf : IRecibeAttack<Dwarf>
 {
     private string name;
@@ -7,19 +10,25 @@ public class Dwarf : IRecibeAttack<Dwarf>
         get { return this.name; }
         set { this.name = value; }
     }
+    private int health;
+    public int Health
+    {
+        get { return this.health; }
+        set { this.health = value; }
+    }
 
-    public Axe axe { get; set; }
-    public Shield shield { get; set; }
-    public Helmet helmet { get; set; }
+    public Axe Axe{ get; set; }
+    public Shield Shield{ get; set; }
+    public Helmet Helmet{ get; set; }
 
     public int AttackValue
     {
         get
         {
             int attack = 0;
-            if (this.axe != null)
+            if (this.Axe != null)
             {
-                attack += this.axe.AttackValue;
+                attack += this.Axe.AttackValue;
             }
             return attack;
         }
@@ -30,12 +39,23 @@ public class Dwarf : IRecibeAttack<Dwarf>
         get
         {
             int defense = 0;
-            if (this.shield != null) defense += this.shield.DefenseValue;
-            if (this.helmet != null) defense += this.helmet.DefenseValue;
+            if (this.Shield != null) defense += this.Shield.DefenseValue;
+            if (this.Helmet != null) defense += this.Helmet.DefenseValue;
             return defense;
         }
     }
-    public int Health = 10;
-    public class Damage : IRecibeAttack<Dwarf>
+    public Dwarf(string name, Axe axe, Helmet helmet, Shield shield)
+    {
+        this.Name = name;
+        this.Health = 8;
+        this.Axe = axe;
+        this.Helmet = helmet;
+        this.Shield = shield;
+    }
+    public void RecibeAttack(T attacker)
+    {
+        int damage = 0;
+        damage = attacker.AttackValue 
+    }
 
 }
