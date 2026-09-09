@@ -1,4 +1,4 @@
-public class Dwarf
+public class Dwarf : IRecibeAttack<Dwarf>
 {
     private string name;
 
@@ -35,6 +35,7 @@ public class Dwarf
             return defense;
         }
     }
-
     public int Health = 10;
+    public class Damage : IRecibeAttack<Dwarf>
+
 }
