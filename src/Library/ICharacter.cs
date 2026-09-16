@@ -1,6 +1,9 @@
-public interface ICharacter
+namespace Roleplay
 {
-    void RecibeAttack(int attack);
+    public interface ICharacter
+    {
+        void RecibeAttack(int attack);
 
-    void Cure();
+        void Cure();
+    }
 }

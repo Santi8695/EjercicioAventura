@@ -1,10 +1,23 @@
-public class Axe
-{
-    public string Name = "Leviatán";
-    public int AttackValue = 2;
-    public Axe(string name, int attackValue)
+namespace Roleplay
+{    
+    public class Axe: IItem
     {
-        this.AttackValue = attackValue;
-        this.Name = name;
+        public string Name = "Leviatán";
+        public int AttackValue{ get; set;}
+        public int DefenseValue{get; set;}
+        public int CalculateAttack()
+        {
+            return this.AttackValue;
+        }
+        public int CalculateDefense()
+        {
+            return this.DefenseValue;
+        }
+        public Axe(string name, int attackValue, int DefenseValue)
+        {
+            this.AttackValue = CalculateDefense();
+            this.DefenseValue = CalculateAttack();
+            this.Name = name;
+        }
     }
 }

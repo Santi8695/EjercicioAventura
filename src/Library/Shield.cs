@@ -1,8 +1,23 @@
-public class Shield
+namespace Roleplay
 {
-    public int DefenseValue {get;set;}
-    public Shield(int defense)
+    public class Shield
     {
-        this.DefenseValue=defense;
+        public string Name{get; set;}
+        public int AttackValue{ get; set;}
+        public int DefenseValue{get; set;}
+        public int CalculateAttack()
+        {
+            return this.AttackValue;
+        }
+        public int CalculateDefense()
+        {
+            return this.DefenseValue;
+        }
+        public Shield(string name, int attackValue, int DefenseValue)
+        {
+            this.AttackValue = CalculateDefense();
+            this.DefenseValue = CalculateAttack();
+            this.Name = name;
+        }
     }
 }
