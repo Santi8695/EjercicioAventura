@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
-public class Dwarf : IRecibeAttack<Dwarf>
+public class Dwarf : ICharacter
 {
     private string name;
 
@@ -20,29 +20,16 @@ public class Dwarf : IRecibeAttack<Dwarf>
     public Axe Axe{ get; set; }
     public Shield Shield{ get; set; }
     public Helmet Helmet{ get; set; }
-
-    public int AttackValue
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public int CalculateAttack()
     {
-        get
-        {
-            int attack = 0;
-            if (this.Axe != null)
-            {
-                attack += this.Axe.AttackValue;
-            }
-            return attack;
-        }
+        return this.Axe.AttackValue;
     }
 
-    public int DefenseValue
+    public int CalculateDefense()
     {
-        get
-        {
-            int defense = 0;
-            if (this.Shield != null) defense += this.Shield.DefenseValue;
-            if (this.Helmet != null) defense += this.Helmet.DefenseValue;
-            return defense;
-        }
+        return this.Helmet.DefenseValue + this.Shield.DefenseValue;
     }
     public Dwarf(string name, Axe axe, Helmet helmet, Shield shield)
     {
@@ -51,11 +38,15 @@ public class Dwarf : IRecibeAttack<Dwarf>
         this.Axe = axe;
         this.Helmet = helmet;
         this.Shield = shield;
+        this.AttackValue = CalculateAttack();
+        this.DefenseValue = CalculateDefense();
     }
-    public void RecibeAttack(T attacker)
+    public void RecibeAttack(int attack)
     {
-        int damage = 0;
-        damage = attacker.AttackValue 
+        int danio = attack - this.DefenseValue;
+        if(danio<0)
+            danio=0;
+        this.Health -= danio;
+        Console.WriteLine($"{this.Name} ha sufrido {danio} de daño, quedo a {this.Health}");
     }
-
 }

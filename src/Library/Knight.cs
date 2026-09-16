@@ -1,6 +1,6 @@
 using System;
 
-public class Knight : IAttack, IDefense, ICure
+public class Knight : ICharacter
 {
     public string Name { get; set; }
     public Sword Sword { get; set; }
