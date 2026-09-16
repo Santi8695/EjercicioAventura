@@ -1,4 +1,8 @@
 public class Armor
 {
-    int DeffenseValue{get;set;}
+    public int DefenseValue { get; set; }
+    public Armor(int defense)
+    {
+        this.DefenseValue = defense;
+    }
 }
