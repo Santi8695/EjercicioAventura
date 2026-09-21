@@ -1,47 +1,37 @@
 using System;
-
-public class Knight : ICharacter
+namespace roleplay
 {
-    public string Name { get; set; }
-    public IItem FirstItem { get; set; }
-    public IItem SecondItem { get; set; }
-    public IItem ThirdItem { get; set; }
-    public int AttackValue { get; set; }
-    public int DeffenseValue { get; set; }
-    public int Health { get; set; }
-
-    public Knight(string name, Sword sword, Shield shield, Armor armor)
+    public class Knight : ICharacter
     {
-        this.Name = name;
-        this.FirstItem = sword;
-        this.SecondItem = shield;
-        this.ThirdItem = armor;
-        this.Health = 20;
-        this.AttackValue = CalculateAttack();
-        this.DeffenseValue = CalculateDefense();
-    }
+        public string Name { get; set; }
+        public IItem FirstItem { get; set; }
+        public IItem SecondItem { get; set; }
+        public IItem ThirdItem { get; set; }
+        public int AttackValue { get { return this.FirstItem.AttackValue + this.SecondItem.AttackValue + this.ThirdItem.AttackValue; } }
+        public int DefenseValue { get { return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue + this.ThirdItem.DefenseValue; } }
+        public int Health { get; set; }
 
-    public int CalculateAttack()
-    {
-        return this.FirstItem.AttackValue + this.SecondItem.AttackValue + this.ThirdItem.AttackValue;
-    }
+        public Knight(string name, IItem firstItem, IItem secondItem, IItem thirdItem)
+        {
+            this.Name = name;
+            this.FirstItem = firstItem;
+            this.SecondItem = secondItem;
+            this.ThirdItem = thirdItem;
+            this.Health = 20;
+        }
 
-    public void RecibeAttack(int attack)
-    {
-        int danio = attack - this.DeffenseValue;
-        if (danio < 0)
-            danio = 0;
-        this.Health -= danio;
-        Console.WriteLine($"{this.Name} ha sufrido {danio} de daño, quedo a {this.Health}");
-    }
 
-    public int CalculateDefense()
-    {
-        return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue + this.ThirdItem.DefenseValue;
-    }
+        public void RecibeAttack(int attack)
+        {
+            int danio = attack - this.DefenseValue;
+            if (danio < 0)
+                danio = 0;
+            this.Health -= danio;
+        }
 
-    public void Cure()
-    {
-        this.Health = 20;
+        public void Cure()
+        {
+            this.Health = 20;
+        }
     }
 }

@@ -1,11 +1,14 @@
-public class Spell
+namespace roleplay
 {
-    public int AttackValue { get; set; }
-    public int DefenseValue { get; set; }
-
-    public Spell(int attack, int defense)
+    public class Spell : IMagicItems
     {
-        AttackValue = attack;
-        DefenseValue = defense;
+        public int AttackValue { get; }
+        public int DefenseValue { get; }
+
+        public Spell(int attack, int defense)
+        {
+            this.AttackValue = attack;
+            this.DefenseValue = defense;
+        }
     }
 }

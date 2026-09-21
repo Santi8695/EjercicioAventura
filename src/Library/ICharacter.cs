@@ -1,7 +1,11 @@
-public interface ICharacter
+namespace roleplay
 {
-    int CalculateAttack();
-    int CalculateDefense();
-    void RecibeAttack(int attack);
-    void Cure();
+    public interface ICharacter
+    {
+        int AttackValue { get; }
+        int DefenseValue { get; }
+        int Health { get; } 
+        void RecibeAttack(int attack);
+        void Cure();
+    }
 }
