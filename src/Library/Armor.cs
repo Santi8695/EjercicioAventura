@@ -1,8 +1,11 @@
-public class Armor
+public class Armor : IItem
 {
-    public int DefenseValue { get; set; }
-    public Armor(int defense)
+    public int AttackValue { get; }
+    public int DefenseValue { get; }
+
+    public Armor(int attack, int defense)
     {
+        this.AttackValue = attack;
         this.DefenseValue = defense;
     }
 }

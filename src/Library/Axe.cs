@@ -1,10 +1,11 @@
-public class Axe
+public class Axe : IItem
 {
-    public string Name = "Leviatán";
-    public int AttackValue = 2;
-    public Axe(string name, int attackValue)
+    public int AttackValue { get; }
+    public int DefenseValue { get; }
+
+    public Axe(int attack, int defense)
     {
-        this.AttackValue = attackValue;
-        this.Name = name;
+        this.AttackValue = attack;
+        this.DefenseValue = defense;
     }
 }

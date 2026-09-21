@@ -1,4 +1,11 @@
-public class Helmet
+public class Helmet : IItem
 {
-    public int DefenseValue = 2;
+    public int AttackValue { get; }
+    public int DefenseValue { get; }
+
+    public Helmet(int attack, int defense)
+    {
+        this.AttackValue = attack;
+        this.DefenseValue = defense;
+    }
 }
