@@ -1,0 +1,8 @@
+namespace RoleplayGame;
+
+public class SpellOne : ISpell
+{
+    public int AttackValue => 10;
+
+    public int DefenseValue => 5;
+}
