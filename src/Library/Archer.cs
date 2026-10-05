@@ -1,10 +1,7 @@
-using System;
-using System.ComponentModel;
-using System.Net.Http.Headers;
 namespace Roleplay
 {
     
-    public class Dwarf : ICharacter
+    public class Archer : ICharacter
     {
         private string name;
 

@@ -1,8 +1,8 @@
 namespace Roleplay
 {    
-    public class Axe: IAttackItem, IItems
+    public class Bow : IAttackItem, IItems
     {
-        public string Name = "Leviatán";
+        public string Name = "Arco";
         public int AttackValue{ get; set;}
         public int DefenseValue{get; set;}
         public int CalculateAttack()
@@ -13,7 +13,7 @@ namespace Roleplay
         {
             return this.DefenseValue;
         }
-        public Axe(string name, int attackValue, int DefenseValue)
+        public Bow(string name, int attackValue, int DefenseValue)
         {
             this.AttackValue = CalculateDefense();
             this.DefenseValue = CalculateAttack();

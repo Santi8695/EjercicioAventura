@@ -1,6 +1,6 @@
 namespace Roleplay
 {
-    public class Helmet : IItem
+    public class Helmet : IItems
     {
         public string Name{get; set;}
         public int AttackValue{ get; set;}
