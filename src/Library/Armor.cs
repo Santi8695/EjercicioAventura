@@ -1,8 +1,14 @@
-public class Armor
+namespace roleplay
 {
-    public int DefenseValue { get; set; }
-    public Armor(int defense)
+    public class Armor : IItem
     {
-        this.DefenseValue = defense;
+        public int AttackValue { get; }
+        public int DefenseValue { get; }
+
+        public Armor(int attack, int defense)
+        {
+            this.AttackValue = attack;
+            this.DefenseValue = defense;
+        }
     }
 }

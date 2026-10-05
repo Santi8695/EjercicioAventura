@@ -1,3 +1,5 @@
+namespace RoleplayGame;
+
 public abstract class ICharacter
 {
     public string Name { get; set; }

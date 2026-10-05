@@ -1,8 +1,14 @@
-public class Shield
+namespace roleplay
 {
-    public int DefenseValue {get;set;}
-    public Shield(int defense)
+    public class Shield : IItem
     {
-        this.DefenseValue=defense;
+        public int AttackValue { get; }
+        public int DefenseValue { get; }
+
+        public Shield(int attack, int defense)
+        {
+            this.AttackValue = attack;
+            this.DefenseValue = defense;
+        }
     }
 }

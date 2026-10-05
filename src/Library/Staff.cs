@@ -1,11 +1,14 @@
-public class Staff
+namespace roleplay
 {
-    public int AttackValue { get; set; }
-    public int DefenseValue { get; set; }
-
-    public Staff(int attack, int defense)
+    public class Staff : IMagicItems
     {
-        AttackValue = attack;
-        DefenseValue = defense;
+        public int AttackValue { get; }
+        public int DefenseValue { get; }
+
+        public Staff(int attack, int defense)
+        {
+            this.AttackValue = attack;
+            this.DefenseValue = defense;
+        }
     }
 }

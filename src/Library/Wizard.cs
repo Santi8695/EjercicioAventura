@@ -1,7 +1,8 @@
 using System;
 
-namespace MagoRPG
+namespace roleplay
 {
+<<<<<<< HEAD
     public interface IMagicItem
     {
         int CalculateAttack();
@@ -13,10 +14,29 @@ namespace MagoRPG
         public string Name { get; set; }
         public IMagicItem FirstMagicItem { get; set; }
         public IMagicItem SecondMagicItem { get; set; }
+=======
+    public class Wizard : ICharacter
+    {
+        public string Name { get; set; }
+        public IMagicItems FirstItem { get; set; }
+        public IMagicItems SecondItem { get; set; }
+
+        public int AttackValue
+        {
+            get { return this.FirstItem.AttackValue + this.SecondItem.AttackValue; }
+        }
+
+        public int DefenseValue
+        {
+            get { return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue; }
+        }
+
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
         public int Health { get; set; }
         public int AttackValue { get; set; }
         public int DefenseValue { get; set; }
 
+<<<<<<< HEAD
         private const int MaxHealth = 5;
 
         public Wizard(string name, IMagicItem firstMagicItem, IMagicItem secondMagicItem)
@@ -80,29 +100,27 @@ namespace MagoRPG
             // hay que actualizarlos a mano cada vez que cambia un item
             AttackValue = CalcularAtaqueTotal();
             DefenseValue = CalcularDefensaTotal();
+=======
+        public Wizard(string name, IMagicItems firstItem, IMagicItems secondItem)
+        {
+            this.Name = name;
+            this.FirstItem = firstItem;
+            this.SecondItem = secondItem;
+            this.Health = 5;
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
         }
 
-        public void ReceiveAttack(int power)
+        public void RecibeAttack(int attack)
         {
-            // El daño real es el poder del ataque menos la defensa del mago
-            int actualDamage = power - DefenseValue;
-
-            if (actualDamage > 0)
-            {
-                Health -= actualDamage;
-            }
-
-            if (Health < 0)
-            {
-                Health = 0;
-            }
+            int danio = attack - this.DefenseValue;
+            if (danio < 0)
+                danio = 0;
+            this.Health -= danio;
         }
 
         public void Cure()
         {
-            // Restaura la salud del mago al máximo
-            Health = MaxHealth;
-            Console.WriteLine($"{Name} se ha curado completamente.");
+            this.Health = 5;
         }
     }
 }
