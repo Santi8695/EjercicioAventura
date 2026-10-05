@@ -1,126 +1,136 @@
-using System;
+using System.Collections.Generic;
 
-namespace roleplay
+namespace RoleplayGame;
+
+/// <summary>
+/// Representa a un mago del juego que puede atacar, defenderse y usar objetos.
+/// </summary>
+public class Wizard : ICharacter, IMagicCharacter
 {
-<<<<<<< HEAD
-    public interface IMagicItem
+    private readonly List<IItem> items = new List<IItem>();
+    private readonly List<IMagicalItem> magicalItems = new List<IMagicalItem>();
+    private readonly SpellsBook spellsBook = new SpellsBook();
+
+    /// <summary>
+    /// Inicializa un nuevo mago. Su libro de hechizos cuenta como item mágico.
+    /// </summary>
+    /// <param name="name">Nombre del mago.</param>
+    public Wizard(string name) : base(name)
     {
-        int CalculateAttack();
-        int CalculateDefense();
+        this.magicalItems.Add(this.spellsBook);
     }
 
-    public class Wizard : ICharacter
+    /// <summary>
+    /// Valor total de ataque: items comunes de ataque + items mágicos de ataque.
+    /// </summary>
+    public override int AttackValue
     {
-        public string Name { get; set; }
-        public IMagicItem FirstMagicItem { get; set; }
-        public IMagicItem SecondMagicItem { get; set; }
-=======
-    public class Wizard : ICharacter
-    {
-        public string Name { get; set; }
-        public IMagicItems FirstItem { get; set; }
-        public IMagicItems SecondItem { get; set; }
-
-        public int AttackValue
-        {
-            get { return this.FirstItem.AttackValue + this.SecondItem.AttackValue; }
-        }
-
-        public int DefenseValue
-        {
-            get { return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue; }
-        }
-
->>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
-        public int Health { get; set; }
-        public int AttackValue { get; set; }
-        public int DefenseValue { get; set; }
-
-<<<<<<< HEAD
-        private const int MaxHealth = 5;
-
-        public Wizard(string name, IMagicItem firstMagicItem, IMagicItem secondMagicItem)
-        {
-            Name = name;
-            Health = MaxHealth;
-            FirstMagicItem = firstMagicItem;
-            SecondMagicItem = secondMagicItem;
-
-            AttackValue = CalcularAtaqueTotal();
-            DefenseValue = CalcularDefensaTotal();
-        }
-
-        // Recorre los items mágicos del mago y suma su valor de ataque
-        private int CalcularAtaqueTotal()
+        get
         {
             int total = 0;
-            IMagicItem[] items = { FirstMagicItem, SecondMagicItem };
 
-            for (int i = 0; i < items.Length; i++)
+            foreach (IItem item in this.items)
             {
-                if (items[i] != null)
+                if (item is IAttackItem attackItem)
                 {
-                    total += items[i].CalculateAttack();
+                    total += attackItem.AttackValue;
+                }
+            }
+
+            foreach (IMagicalItem magicalItem in this.magicalItems)
+            {
+                if (magicalItem is IMagicalAttackItem magicalAttackItem)
+                {
+                    total += magicalAttackItem.AttackValue;
                 }
             }
 
             return total;
         }
+    }
 
-        // Recorre los items mágicos del mago y suma su valor de defensa
-        private int CalcularDefensaTotal()
+    /// <summary>
+    /// Valor total de defensa: items comunes de defensa + items mágicos de defensa.
+    /// </summary>
+    public override int DefenseValue
+    {
+        get
         {
             int total = 0;
-            IMagicItem[] items = { FirstMagicItem, SecondMagicItem };
 
-            for (int i = 0; i < items.Length; i++)
+            foreach (IItem item in this.items)
             {
-                if (items[i] != null)
+                if (item is IDefenseItem defenseItem)
                 {
-                    total += items[i].CalculateDefense();
+                    total += defenseItem.DefenseValue;
+                }
+            }
+
+            foreach (IMagicalItem magicalItem in this.magicalItems)
+            {
+                if (magicalItem is IMagicalDefenseItem magicalDefenseItem)
+                {
+                    total += magicalDefenseItem.DefenseValue;
                 }
             }
 
             return total;
         }
+    }
 
-        // Cambia o agrega un item mágico; ocupa el primer slot libre
-        public void EquipItem(IMagicItem item)
+    public override void AddItem(IItem item)
+    {
+        if (item == null)
         {
-            if (FirstMagicItem == null)
-            {
-                FirstMagicItem = item;
-            }
-            else
-            {
-                SecondMagicItem = item;
-            }
-
-            // AttackValue/DefenseValue son campos, no se recalculan solos:
-            // hay que actualizarlos a mano cada vez que cambia un item
-            AttackValue = CalcularAtaqueTotal();
-            DefenseValue = CalcularDefensaTotal();
-=======
-        public Wizard(string name, IMagicItems firstItem, IMagicItems secondItem)
-        {
-            this.Name = name;
-            this.FirstItem = firstItem;
-            this.SecondItem = secondItem;
-            this.Health = 5;
->>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
+            return;
         }
 
-        public void RecibeAttack(int attack)
+        if (!this.items.Contains(item))
         {
-            int danio = attack - this.DefenseValue;
-            if (danio < 0)
-                danio = 0;
-            this.Health -= danio;
+            this.items.Add(item);
+        }
+    }
+
+    public override void RemoveItem(IItem item)
+    {
+        if (item == null)
+        {
+            return;
         }
 
-        public void Cure()
+        this.items.Remove(item);
+    }
+
+    public void AddItem(IMagicalItem item)
+    {
+        if (item == null)
         {
-            this.Health = 5;
+            return;
         }
+
+        if (!this.magicalItems.Contains(item))
+        {
+            this.magicalItems.Add(item);
+        }
+    }
+
+    public void RemoveItem(IMagicalItem item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        this.magicalItems.Remove(item);
+    }
+
+    public void AddSpell(ISpell spell)
+    {
+        this.spellsBook.AddSpell(spell);
+    }
+
+    public void RemoveSpell(ISpell spell)
+    {
+        this.spellsBook.RemoveSpell(spell);
     }
 }
