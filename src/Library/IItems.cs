@@ -1,5 +1,6 @@
-public interface IItems
+public interface IItem
 {
-    int CalculateAttack();
-    int CalculateDefense();
+    int AttackValue { get; }
+    int DefenseValue { get; }
+
 }

@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using Roleplay;
 
-namespace MagoRPG
+namespace roleplay
 {
+<<<<<<< HEAD
     /// <summary>
     /// Representa a un mago del juego que puede atacar, defenderse y usar objetos.
     /// </summary>
     public class Wizard : IMagicCharacter, ICharacter
+=======
+    public class Wizard : ICharacter
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
     {
         private readonly List<IItems> items;
         private readonly List<IMagicalItems> magicalItems;
@@ -16,6 +20,7 @@ namespace MagoRPG
         /// Nombre del mago.
         /// </summary>
         public string Name { get; set; }
+<<<<<<< HEAD
 
         /// <summary>
         /// Libro de hechizos que usa el mago.
@@ -31,42 +36,26 @@ namespace MagoRPG
         /// <summary>
         /// Obtiene el valor total de ataque del mago.
         /// </summary>
+=======
+        public IMagicItems FirstItem { get; set; }
+        public IMagicItems SecondItem { get; set; }
+
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
         public int AttackValue
         {
-            get
-            {
-                int ataqueStaff = 0;
-                int ataqueLibro = 0;
-
-                if (Staff != null)
-                    ataqueStaff = Staff.AttackValue;
-
-                if (SpellsBook != null)
-                    ataqueLibro = SpellsBook.AttackValue;
-
-                return ataqueStaff + ataqueLibro;
-            }
+            get { return this.FirstItem.AttackValue + this.SecondItem.AttackValue; }
         }
 
+<<<<<<< HEAD
         // La defensa del mago se calcula sumando la de su bastón y su libro de hechizos
         /// <summary>
         /// Obtiene el valor total de defensa del mago.
         /// </summary>
+=======
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
         public int DefenseValue
         {
-            get
-            {
-                int defensaStaff = 0;
-                int defensaLibro = 0;
-
-                if (Staff != null)
-                    defensaStaff = Staff.DefenseValue;
-
-                if (SpellsBook != null)
-                    defensaLibro = SpellsBook.DefenseValue;
-
-                return defensaStaff + defensaLibro;
-            }
+            get { return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue; }
         }
 
         /// <summary>
@@ -74,6 +63,7 @@ namespace MagoRPG
         /// </summary>
         public int Health { get; set; }
 
+<<<<<<< HEAD
         private const int MaxHealth = 5;
 
         /// <summary>
@@ -89,22 +79,22 @@ namespace MagoRPG
             Staff = new Staff(5, 5); // valores base de ejemplo
             items = new List<IItems>();
             magicalItems = new List<IMagicalItems>();
+=======
+        public Wizard(string name, IMagicItems firstItem, IMagicItems secondItem)
+        {
+            this.Name = name;
+            this.FirstItem = firstItem;
+            this.SecondItem = secondItem;
+            this.Health = 5;
+>>>>>>> 9eaba7515e6445d3abfd47fbaf32358efafc0deb
         }
 
-        public void ReceiveAttack(int power)
+        public void RecibeAttack(int attack)
         {
-            // El daño real es el poder del ataque menos la defensa del mago
-            int actualDamage = power - DefenseValue;
-
-            if (actualDamage > 0)
-            {
-                Health -= actualDamage;
-            }
-
-            if (Health < 0)
-            {
-                Health = 0;
-            }
+            int danio = attack - this.DefenseValue;
+            if (danio < 0)
+                danio = 0;
+            this.Health -= danio;
         }
 
         /// <summary>
@@ -112,9 +102,7 @@ namespace MagoRPG
         /// </summary>
         public void Cure()
         {
-            // Restaura la salud del mago al máximo
-            Health = MaxHealth;
-            Console.WriteLine($"{Name} se ha curado completamente.");
+            this.Health = 5;
         }
 
         /// <summary>
