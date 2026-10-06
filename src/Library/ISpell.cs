@@ -1,8 +1,9 @@
-namespace RoleplayGame;
-
-public interface ISpell
+﻿namespace Roleplay
 {
-    int AttackValue { get; }
+    public interface ISpell
+    {
+        int AttackValue { get; }
 
-    int DefenseValue { get; }
+        int DefenseValue { get; }
+    }
 }

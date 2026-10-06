@@ -1,23 +1,15 @@
 namespace Roleplay
-{    
-    public class Bow : IAttackItem, IItems
+{
+    public class Bow : IAttackItem
     {
-        public string Name = "Arco";
-        public int AttackValue{ get; set;}
-        public int DefenseValue{get; set;}
-        public int CalculateAttack()
+        public string Name { get; private set; }
+
+        public int AttackValue { get; private set; }
+
+        public Bow(string name, int attackValue)
         {
-            return this.AttackValue;
-        }
-        public int CalculateDefense()
-        {
-            return this.DefenseValue;
-        }
-        public Bow(string name, int attackValue, int DefenseValue)
-        {
-            this.AttackValue = CalculateDefense();
-            this.DefenseValue = CalculateAttack();
             this.Name = name;
+            this.AttackValue = attackValue;
         }
     }
 }

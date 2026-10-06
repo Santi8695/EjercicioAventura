@@ -1,6 +1,7 @@
-amespace RoleplayGame;
-
-public interface IMagicalAttackItem : IMagicalItem
+namespace Roleplay
 {
-    int AttackValue { get; }
+    public interface IMagicalAttackItem : IMagicalItem
+    {
+        int AttackValue { get; }
+    }
 }

@@ -1,28 +1,13 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace Roleplay
 {
-    public interface IMagicCharacter : ICharacter, IMagicItems, ISpell
+    public interface IMagicCharacter
     {
+        void AddSpell(ISpell spell);
 
-        public void AddSpell(ISpell spell)
-        {
-            return spell;
-        }
-        public void RemoveSpell(ISpell spell)
-        {
-            return spell;
-        }
+        void RemoveSpell(ISpell spell);
 
-        public void AddItem(IMagicItem item)
-        {
-            return item;
-        }
+        void AddItem(IMagicalItem item);
 
-        public void RemoveItem(IMagicItem item)
-        {
-            return item;
-        }
+        void RemoveItem(IMagicalItem item);
     }
 }

@@ -1,37 +1,12 @@
-using System;
-namespace roleplay
+namespace Roleplay
 {
     public class Knight : ICharacter
     {
-        public string Name { get; set; }
-        public IItem FirstItem { get; set; }
-        public IItem SecondItem { get; set; }
-        public IItem ThirdItem { get; set; }
-        public int AttackValue { get { return this.FirstItem.AttackValue + this.SecondItem.AttackValue + this.ThirdItem.AttackValue; } }
-        public int DefenseValue { get { return this.FirstItem.DefenseValue + this.SecondItem.DefenseValue + this.ThirdItem.DefenseValue; } }
-        public int Health { get; set; }
-
-        public Knight(string name, IItem firstItem, IItem secondItem, IItem thirdItem)
+        public Knight(string name, IItem firstItem, IItem secondItem, IItem thirdItem) : base(name, 20)
         {
-            this.Name = name;
-            this.FirstItem = firstItem;
-            this.SecondItem = secondItem;
-            this.ThirdItem = thirdItem;
-            this.Health = 20;
-        }
-
-
-        public void RecibeAttack(int attack)
-        {
-            int danio = attack - this.DefenseValue;
-            if (danio < 0)
-                danio = 0;
-            this.Health -= danio;
-        }
-
-        public void Cure()
-        {
-            this.Health = 20;
+            this.AddItem(firstItem);
+            this.AddItem(secondItem);
+            this.AddItem(thirdItem);
         }
     }
 }

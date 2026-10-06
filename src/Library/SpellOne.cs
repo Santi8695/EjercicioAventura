@@ -1,12 +1,12 @@
 namespace Roleplay
 {
-    public class Staff : IAttackItem, IDefenseItem
+    public class SpellOne : ISpell
     {
         public int AttackValue { get; private set; }
 
         public int DefenseValue { get; private set; }
 
-        public Staff(int attackValue, int defenseValue)
+        public SpellOne(int attackValue, int defenseValue)
         {
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;

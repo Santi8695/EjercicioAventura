@@ -1,14 +1,15 @@
-namespace roleplay
+namespace Roleplay
 {
-    public class Armor : IItem
+    public class Armor : IDefenseItem
     {
-        public int AttackValue { get; }
-        public int DefenseValue { get; }
+        public string Name { get; private set; }
 
-        public Armor(int attack, int defense)
+        public int DefenseValue { get; private set; }
+
+        public Armor(string name, int defenseValue)
         {
-            this.AttackValue = attack;
-            this.DefenseValue = defense;
+            this.Name = name;
+            this.DefenseValue = defenseValue;
         }
     }
 }
